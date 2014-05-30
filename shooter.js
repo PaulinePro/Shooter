@@ -29,7 +29,6 @@ if (url.indexOf('sub') >= 0) {
 // find every subtitle from the url
 function findSub(url, page) {
     console.log('search', url + '/?page=' + page);
-
     request(url + '/?page=' + page, function(err, res, body) {
         if (err) {
             console.log(err);
@@ -52,37 +51,81 @@ function findSub(url, page) {
 }
 
 // download subtitle from the url
-function downloadSub(url) {
+function downloadSub(url, callback) {
     console.log('found sub:', url);
     request(url, function(err, res, body) {
         if (err) {
             console.log(err);
-            return;
+            return callback();
         }
 
         $ = cheerio.load(body);
+
+        // get the download id of this subtitle
         var download = $('td[class="download"]');
         var match = /var gFileidToBeDownlaod = (\d+);/i.exec(download.html());
         if (match.length <= 0) {
-            return;
+            return callback();
         }
-
         var id = match[1];
-        var hashUrl = 'http://www.shooter.cn/files/file3.php?hash=' + shtg_filehash + '&fileid=' + id;
+        var hashUrl = 'http://www.shooter.cn/files/file3.php?hash=' +
+            shtg_filehash + '&fileid=' + id;
+
+        // var title = $('span[id="movietitle1"]').text();
+
+        // var rankbox = $('div[class="rankbox"]');
+        // var rank = 0;
+        // var ranknum = rankbox.find('span[class="ranknum"]').text();
+        // if (ranknum) {
+        //     match = /(\d+)分/.exec(ranknum)
+        //     if (match.length > 0) {
+        //         rank = ~~match[1];
+        //     }
+        // }
+        //
+        // var comment = 0;
+        // var commentnum = rankbox.find('em[class="f12"]').text();
+        // if (commentnum) {
+        //     match = /\((\d+)人评价\)/.exec(commentnum);
+        //     if (match.length > 0) {
+        //         comment = ~~match[1]
+        //     }
+        // }
+
+        // get subtitle languages
+        var subtitle = '';
+
+        var subdes_td = $('td[class="subdes_td"]');
+        subdes_td.each(function(i, elem) {
+            // there are two subdes_td, but we only want the last one
+            if (i === subdes_td.length - 1) {
+                subtitle = $(this).text();
+            }
+        });
+
+        // use the hashurl to get the hash text,
+        // then use shtg_calcfilehash() to build a complete url
         request(hashUrl, function(err, res, body) {
             var hash = shtg_calcfilehash(body);
             var url = 'http://file1.shooter.cn' + hash;
 
-            var match = /file1\.shooter\.cn\/c\/(.*?)\?/i.exec(url);
-            var file;
-            if (match && match.length > 0) {
-                file = fs.createWriteStream(match[1]);
-            } else {
-                file = fs.createWriteStream(id + '.rar');
-            }
+            // we only want need zh-TW subtitle
+            if (subtitle.indexOf('繁') >= 0) {
+                var match = /file1\.shooter\.cn\/c\/(.*?)\?/i.exec(url);
+                var file;
+                if (match && match.length > 0) {
+                    file = fs.createWriteStream(match[1]);
+                } else {
+                    file = fs.createWriteStream(id + '.rar');
+                }
 
-            console.log('download', url);
-            request(url).pipe(file);
+                console.log('download', id, url);
+                request(url, function(err) {
+                    if (err) {
+                        return;
+                    }
+                }).pipe(file);
+            }
         });
     });
 }
@@ -92,7 +135,8 @@ function shtg_calcfilehash(a) {
         var g = "";
         for (var f = 0; f < j.length; f++) {
             var h = j.charCodeAt(f);
-            g += (h + 47 >= 126) ? String.fromCharCode(" ".charCodeAt(0) + (h + 47) % 126) : String.fromCharCode(h + 47)
+            g += (h + 47 >= 126) ? String.fromCharCode(" ".charCodeAt(0) + (h +
+                47) % 126) : String.fromCharCode(h + 47)
         }
         return g
     }
@@ -108,7 +152,8 @@ function shtg_calcfilehash(a) {
     }
 
     function c(j, h, g, f) {
-        return j.substr(j.length - f + g - h, h) + j.substr(j.length - f, g - h) + j.substr(j.length - f + g, f - g) + j.substr(0, j.length - f)
+        return j.substr(j.length - f + g - h, h) + j.substr(j.length - f, g - h) +
+            j.substr(j.length - f + g, f - g) + j.substr(0, j.length - f)
     }
     if (a.length > 32) {
         switch (a.charAt(0)) {
