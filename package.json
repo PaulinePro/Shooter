@@ -1,6 +1,6 @@
 {
     "name": "shooter_official",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Download all subtitles from shooter.cn",
     "main": "./bin/shooter.js",
     "author": "davidyen1124 <davidyen1124@gmail.com>",

@@ -2,13 +2,13 @@
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
-var shtg_calcfilehash = require('./lib/shtg_calcfilehash');
+var shtg_calcfilehash = require('../lib/shtg_calcfilehash');
 
 var shooter_url = 'http://www.shooter.cn';
 var shtg_filehash = 'duei7chy7gj59fjew73hdwh213f';
 
 // check user gives a valid query string
-if (process.length < 3) {
+if (process.argv.length < 3) {
     console.log('node shooter.js <query> [output path]');
     process.exit(1);
 }
