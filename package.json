@@ -1,18 +1,26 @@
 {
-  "name": "shooter",
-  "version": "0.0.0",
-  "description": "download all the subtitles from shooter.cn by one command",
-  "main": "shooter.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "shooter"
-  ],
-  "author": "Sparks Lab",
-  "license": "WTFPL",
-  "dependencies": {
-    "cheerio": "^0.16.0",
-    "request": "^2.36.0"
-  }
+    "author": "davidyen1124",
+    "name": "shooter",
+    "version": "0.1.0",
+    "description": "download all the subtitles from shooter.cn by one command",
+    "main": "shooter.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/davidyen1124/Shooter"
+    },
+    "bin": {
+        "shooter": "./bin/shooter.js"
+    },
+    "keywords": [
+        "shooter"
+    ],
+    "author": "Sparks Lab",
+    "license": "WTFPL",
+    "dependencies": {
+        "cheerio": "^0.16.0",
+        "request": "^2.36.0"
+    }
 }

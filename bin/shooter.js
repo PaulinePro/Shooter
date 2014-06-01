@@ -1,7 +1,8 @@
+#!/usr/bin/env node
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
-var shtg_calcfilehash = require('./shtg_calcfilehash');
+var shtg_calcfilehash = require('./lib/shtg_calcfilehash');
 
 var shooter_url = 'http://www.shooter.cn';
 var shtg_filehash = 'duei7chy7gj59fjew73hdwh213f';
@@ -29,7 +30,7 @@ if (url.indexOf('sub') >= 0) {
 
 // find every subtitle from the url
 function findSub(url, page) {
-    console.log('search', url + '/?page=' + page);
+    // console.log('search', url + '/?page=' + page);
     request(url + '/?page=' + page, function(err, res, body) {
         if (err) {
             console.log(err);
@@ -53,7 +54,7 @@ function findSub(url, page) {
 
 // download subtitle from the url
 function downloadSub(url, callback) {
-    console.log('found sub:', url);
+    // console.log('found sub:', url);
     request(url, function(err, res, body) {
         if (err) {
             console.log(err);
