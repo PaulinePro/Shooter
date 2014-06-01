@@ -10,7 +10,7 @@ Fork this repo and play around with it, don't forget to make pull request!
 * Install the requirements <code>npm install</code>
 
 ###Usage:###
-* <code>node chooster.js query [directory]</code>
+* <code>node shooter.js query [directory]</code>
 
 ###Lincense:###
 * Just do what the f*** you want!
