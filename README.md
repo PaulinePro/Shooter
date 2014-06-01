@@ -6,11 +6,13 @@ Fork this repo and play around with it, don't forget to make pull request!
 
 ###Installation:###
 
+* <code>npm install shooter_official</code>
+<br />or<br />
 * Clone this repo <code>git clone https://github.com/davidyen1124/Shooter</code>
 * Install the requirements <code>npm install</code>
 
 ###Usage:###
-* <code>node shooter.js query [directory]</code>
+* <code>shooter 'query' [directory]</code>
 
 ###Lincense:###
 * Just do what the f*** you want!
