@@ -6,7 +6,7 @@ var shooter_url = 'http://www.shooter.cn';
 var shtg_filehash = 'duei7chy7gj59fjew73hdwh213f';
 
 // check user gives a valid query string
-if (process.argv[2] === undefined) {
+if (process.length < 3) {
     console.log('node shooter.js <query>');
     process.exit(1);
 }
@@ -111,12 +111,19 @@ function downloadSub(url, callback) {
 
             // we only want need zh-TW subtitle
             if (subtitle.indexOf('繁') >= 0) {
+                var path = '';
+                if (process.argv[3] !== undefined) {
+                    path = process.argv[3];
+                }
+
                 var match = /file1\.shooter\.cn\/c\/(.*?)\?/i.exec(url);
                 var file;
                 if (match && match.length > 0) {
-                    file = fs.createWriteStream(match[1]);
+                    path += match[1];
+                    file = fs.createWriteStream(path);
                 } else {
-                    file = fs.createWriteStream(id + '.rar');
+                    path += id + '.rar';
+                    file = fs.createWriteStream(path);
                 }
 
                 console.log('download', id, url);
