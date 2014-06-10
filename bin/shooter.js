@@ -2,6 +2,7 @@
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var chalk = require('chalk');
 var shtg_calcfilehash = require('../lib/shtg_calcfilehash');
 
 var shooter_url = 'http://www.shooter.cn';
@@ -140,7 +141,8 @@ function downloadSub(url, callback) {
             }
             var file = fs.createWriteStream(directory + filename);
 
-            console.log('download', id, url);
+            console.log(chalk.cyan.bold('Download'), chalk.magenta.bold(id));
+            console.log(chalk.grey.underline(url));
             request(url).pipe(file);
         });
     });

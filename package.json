@@ -1,26 +1,27 @@
 {
-    "name": "shooter_official",
-    "version": "0.0.2",
-    "description": "Download all subtitles from shooter.cn",
-    "main": "./bin/shooter.js",
-    "author": "davidyen1124 <davidyen1124@gmail.com>",
-    "license": "WTFPL",
-    "bin": {
-        "shooter": "./bin/shooter.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/davidyen1124/Shooter"
-    },
-    "keywords": [
-        "subtitle",
-        "shooter"
-    ],
-    "bugs": {
-        "url": "https://github.com/davidyen1124/Shooter/issues"
-    },
-    "dependencies": {
-        "cheerio": "^0.16.0",
-        "request": "^2.36.0"
-    }
+  "name": "shooter_official",
+  "version": "0.0.3",
+  "description": "Download all subtitles from shooter.cn",
+  "main": "./bin/shooter.js",
+  "author": "davidyen1124 <davidyen1124@gmail.com>",
+  "license": "WTFPL",
+  "bin": {
+    "shooter": "./bin/shooter.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidyen1124/Shooter"
+  },
+  "keywords": [
+    "subtitle",
+    "shooter"
+  ],
+  "bugs": {
+    "url": "https://github.com/davidyen1124/Shooter/issues"
+  },
+  "dependencies": {
+    "chalk": "^0.4.0",
+    "cheerio": "^0.16.0",
+    "request": "^2.36.0"
+  }
 }
