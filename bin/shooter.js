@@ -71,7 +71,7 @@ function downloadSub(url, callback) {
         }
         var id = match[1];
         var hashUrl = 'http://www.shooter.cn/files/file3.php?hash=' +
-            shtg_filehash + '&fileid=' + id;
+        shtg_filehash + '&fileid=' + id;
 
         // var title = $('span[id="movietitle1"]').text();
 
@@ -121,8 +121,14 @@ function downloadSub(url, callback) {
 
             // if user gave the output directory parameter,
             // then set directory to it
-            if (process.argv[3] !== undefined) {
+            if (process.argv[3]) {
                 directory = process.argv[3];
+
+                // if user doesn't enter a slash after directory name, add it for them
+                if (process.argv[3].lastIndexOf('/') !== process.argv[3].length - 1) {
+                    directory += '/';
+                }
+
                 path = directory;
             }
 
